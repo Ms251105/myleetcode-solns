@@ -1,23 +1,31 @@
-class Solution {
-public:
-    void rotate(vector<int>& nums, int k) {
-        int n = nums.size();          // Get the size of the array
-        k = k % n;                    // Handle cases where k >= n
-        vector<int> temp(k);          // Temporary array to store last 'k' elements
+#include <iostream>
+using namespace std;
 
-        // Step 1: Store last 'k' elements in 'temp'
-        for (int i = n - k; i < n; i++) {
-            temp[i - (n - k)] = nums[i];
-        }
+int main() {
+    int n = 5;                      // Size of the array
+    int d = 2;                      // Right shift by 2 positions
+    int nums[] = {1, 2, 3, 4, 5};   // Example array
+    int temp[d];                    // Temporary array to store last 'd' elements
 
-        // Step 2: Shift first 'n-k' elements 'k' steps to the right
-        for (int i = n - k - 1; i >= 0; i--) {
-            nums[i + k] = nums[i];
-        }
-
-        // Step 3: Copy 'temp' elements back to the beginning
-        for (int i = 0; i < k; i++) {
-            nums[i] = temp[i];
-        }
+    // Step 1: Store last 'd' elements in 'temp'
+    for (int i = n - d; i < n; i++) {
+        temp[i - (n - d)] = nums[i];
     }
-};
+
+    // Step 2: Shift first 'n-d' elements 'd' steps to the right
+    for (int i = 0; i < n - d; i++) {
+        nums[i + d] = nums[i];
+    }
+
+    // Step 3: Copy 'temp' elements back to the beginning
+    for (int i = 0; i < d; i++) {
+        nums[i] = temp[i];
+    }
+
+    // Output the final array
+    for (int i = 0; i < n; i++) {
+        cout << nums[i] << " ";
+    }
+
+    return 0;
+}
